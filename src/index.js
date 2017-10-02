@@ -1,3 +1,3 @@
-const as = '';
+const secret = require('./secret');
 
-console.log(1);
+console.log(secret.TRELLO_API_KEY);
