@@ -15,3 +15,7 @@ export const TRELLO_API_KEY = '';
 export const GMAIL_USERNAME = '';
 export const GMAIL_PASSWORD = '';
 ```
+
+Running script
+```bash
+```
