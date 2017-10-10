@@ -3,13 +3,19 @@
 
 ## Installation
 
+Make sure you have the latest version of node.js (developed wth v8)
 ```bash
+# Update node to latest version.
 npm install -g n
 n latest
+
+# Install dependencies.
+npm install
 ```
 
 ### Trello Setup
-First log into your trello account then visit this URL: https://trello.com/app-key
+First log into your trello account then visit this URL:
+- https://trello.com/app-key
 It will contain two keys: your trello api key and your OAuth token. You will
 need both of these fields.
 
@@ -70,10 +76,10 @@ https://api.robinhood.com/quotes/historicals/?symbols=MSFT,FB,TSLA&interval=day
 
 ## Development Resources
 
-- Obtaining Trello API Key: https://trello.com/app-key
-- NPM Trello API examples: https://github.com/norberteder/trello/blob/master/main.js
 - Trello v1 API Reference: https://trello.readme.io/v1.0/reference
 - Unofficial Robinhood API: https://github.com/sanko/Robinhood
+- Obtaining Trello API Key: https://trello.com/app-key
+- NPM Trello API examples: https://github.com/norberteder/trello/blob/master/main.js
 
 ## TODO
 - Robinhood Note: The maximum number of symbols that can be defined per call is 1630.

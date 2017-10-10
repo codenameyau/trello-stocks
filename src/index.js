@@ -1,3 +1,9 @@
+const api = require('./api');
 const secret = require('./secret');
 
-console.log(secret.TRELLO_API_KEY);
+const main = async () => {
+  const boardLists = await api.getBoardLists(secret.TRELLO_BOARD_ID);
+  console.log(boardLists);
+};
+
+main();

@@ -16,5 +16,13 @@
   "bugs": {
     "url": "https://github.com/codenameyau/trello-stocks/issues"
   },
-  "homepage": "https://github.com/codenameyau/trello-stocks#readme"
+  "homepage": "https://github.com/codenameyau/trello-stocks#readme",
+  "keywords": [
+    "stocks",
+    "trello",
+    "robinhood"
+  ],
+  "dependencies": {
+    "request": "^2.83.0"
+  }
 }
