@@ -52,16 +52,25 @@ exports.updateCard = async (cardId, params) => {
 ********************************************************************/
 const ROBINHOOD_API = 'https://api.robinhood.com';
 
-// TODO: handle pagination
-exports.getTickersInfo = async (tickers) => {
+// TODO: Robinhood API isn't working. Check headers.
+exports.getQuotes = async (tickers) => {
+  if (!tickers.length) { return []; }
+
+  const symbols = `symbols=${tickers.join(',')}`;
+  const endpoint = `${ROBINHOOD_API}/quotes?${symbols}`;
+  return await requestGetPromise(endpoint);
+};
+
+// TODO: handle pagination of 75. Works with 5 so far.
+exports.getHistoricalQuotes = async (tickers) => {
   if (!tickers.length) { return []; }
 
   const params = objectToQueryString({
-    symbols: tickers.join(','),
     interval: 'week'
   });
 
-  const endpoint = `${ROBINHOOD_API}/quotes/historicals${params}`;
+  const symbols = `&symbols=${tickers.join(',')}`;
+  const endpoint = `${ROBINHOOD_API}/quotes/historicals${params}${symbols}`;
   console.log(endpoint);
   return await requestGetPromise(endpoint);
 };

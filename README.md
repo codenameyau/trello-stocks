@@ -83,4 +83,5 @@ https://api.robinhood.com/quotes/historicals/?symbols=MSFT,FB,TSLA&interval=day
 - NPM Trello API examples: https://github.com/norberteder/trello/blob/master/main.js
 
 ## TODO
-- Robinhood Note: The maximum number of symbols that can be defined per call is 1630.
+- Robinhood Note: The maximum number of symbols that can be defined per call is 1630 and 75 for historical.
+- Cronjob for alerts.

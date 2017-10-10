@@ -15,7 +15,7 @@ const main = async () => {
   });
 
   const tickers = Object.keys(cards);
-  const tickersInfo = await api.getTickersInfo(tickers);
+  const tickersInfo = await api.getQuotes(tickers);
   console.log(Object.keys(cards));
   console.log(tickersInfo);
 };
