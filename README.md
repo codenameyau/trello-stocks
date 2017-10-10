@@ -16,6 +16,7 @@ npm install
 ### Trello Setup
 First log into your trello account then visit this URL:
 - https://trello.com/app-key
+
 It will contain two keys: your trello api key and your OAuth token. You will
 need both of these fields.
 

@@ -12,7 +12,6 @@ const objectToQueryString = exports.objectToQueryString = (object) => {
 };
 
 const requestGetPromise = exports.requestGetPromise = (endpoint) => {
-  console.log(endpoint);
   return new Promise((resolve, reject) => {
     request(endpoint, (err, res, data) => {
       if (err) { reject(error); }
@@ -29,15 +28,23 @@ const TRELLO_API = 'https://api.trello.com/1';
 
 const defaultTrelloParams = {
   key: secret.TRELLO_API_KEY,
-  token: secret.TRELLO_OAUTH_TOKEN
+  token: secret.TRELLO_API_TOKEN
 };
 
 exports.getBoardLists = async (boardId) => {
-  const params = objectToQueryString(defaultTrelloParams);
+  const params = objectToQueryString({
+    ...defaultTrelloParams,
+    cards: 'open',
+    card_fields: 'name' // extendable with csv 'name,desc'
+  });
+
   const endpoint = `${TRELLO_API}/boards/${boardId}/lists${params}`;
   return await requestGetPromise(endpoint);
 };
 
+exports.updateCard = async (cardId, params) => {
+
+};
 
 
 /********************************************************************
