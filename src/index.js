@@ -1,11 +1,18 @@
 const api = require('./api');
 // const secret = require('./secret');
-const dump = require('../data/dump/board-list-small');
+const boardLists = require('../data/dump/board-list-small.json');
+
+// NAK - (Northern Dynasty Minerals) [N/A | 123]
+const formatTitle = exports.formatTitle = (stock) => {
+  const symbol = stock.symbol.toUpperCase();
+  const name = stock.name;
+  const format = `${symbol} (${name})`;
+};
 
 const main = async () => {
   // const boardLists = await api.getBoardLists(secret.TRELLO_BOARD_ID);
-  const boardLists = dump.data;
   const cards = {};
+  console.log(boardLists);
 
   boardLists.forEach((list) => {
     list.cards.forEach((card) => {
@@ -14,10 +21,14 @@ const main = async () => {
     });
   });
 
-  const tickers = Object.keys(cards);
-  const tickersInfo = await api.getQuotes(tickers);
-  console.log(Object.keys(cards));
-  console.log(tickersInfo);
+  const tickers = [...(new Set(Object.keys(cards)))];
+  console.log(cards);
+  console.log(tickers);
+  const tickersFundamentals = await api.getTickerData('fundamentals', tickers);
+  console.log(tickersFundamentals);
+  // console.log(Object.keys(cards));
+  // console.log(tickersInfo);
 };
+
 
 main();

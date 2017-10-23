@@ -70,9 +70,16 @@ npm stocks
 https://github.com/sanko/Robinhood/blob/master/Quote.md
 
 ```
+https://api.robinhood.com/quotes/PYPL/
 https://api.robinhood.com/quotes/?symbols=MSFT,FB,TSLA
+
 https://api.robinhood.com/quotes/historicals/?symbols=MSFT,FB,TSLA&interval=week
 https://api.robinhood.com/quotes/historicals/?symbols=MSFT,FB,TSLA&interval=day
+
+https://api.robinhood.com/fundamentals/PYPL/
+https://api.robinhood.com/fundamentals/?symbols=PYPL
+
+https://api.robinhood.com/instruments/4df42b1f-8f39-49ae-bbfb-831c43931218/
 ```
 
 ## Development Resources
@@ -85,3 +92,4 @@ https://api.robinhood.com/quotes/historicals/?symbols=MSFT,FB,TSLA&interval=day
 ## TODO
 - Robinhood Note: The maximum number of symbols that can be defined per call is 1630 and 75 for historical.
 - Cronjob for alerts.
+- Data points: instrument, fundamentals, split
