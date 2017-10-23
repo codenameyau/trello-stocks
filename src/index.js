@@ -1,14 +1,33 @@
 const api = require('./api');
 // const secret = require('./secret');
 const boardLists = require('../data/trello/board-list-small.json');
+const fundamentals = require('../data/robinhood/rh-fundamentals.json').results;
 
-// NAK - (Northern Dynasty Minerals) [N/A | 123]
-const formatTitle = exports.formatTitle = (stock) => {
+
+/********************************************************************
+* UTILS
+********************************************************************/
+const formatTitle = exports.formatTitle = (fundamentals) => {
   const symbol = stock.symbol.toUpperCase();
   const name = stock.name;
   const format = `${symbol} (${name})`;
 };
 
+const formatDescription = exports.formatDescription = (fundamentals) => {
+
+};
+
+const consumeFundamentals = exports.consumeFundamentals = (fundamentals) => {
+  const data = {};
+  data.title = formatTitle(fundamentals);
+  data.description = formatDescription(fundamentals);
+  return data;
+};
+
+
+/********************************************************************
+* MAIN PROGRAM
+********************************************************************/
 const main = async () => {
   // const boardLists = await api.getBoardLists(secret.TRELLO_BOARD_ID);
   const cards = {};
@@ -24,8 +43,16 @@ const main = async () => {
   const tickers = [...(new Set(Object.keys(cards)))];
   console.log(cards);
   console.log(tickers);
-  const tickersFundamentals = await api.getTickerData('fundamentals', tickers);
-  console.log(tickersFundamentals);
+  // const fundamentals = await api.getTickerData('fundamentals', tickers);
+
+  tickers.forEach((ticker, i) => {
+    cards[ticker].fundamentals = fundamentals[i]
+    cards[ticker].trelloUpdate = consumeFundamentals(fundamentals[i])
+  });
+
+  console.log(cards);
+
+  // console.log(fundamentals);
   // console.log(Object.keys(cards));
   // console.log(tickersInfo);
 };

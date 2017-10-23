@@ -17,7 +17,7 @@ const requestGetPromise = exports.requestGetPromise = (url) => {
       if (error) {
         reject(error);
       } else {
-        resolve(data)
+        resolve(JSON.parse(data))
       }
     });
   });
@@ -38,7 +38,7 @@ exports.getBoardLists = async (boardId) => {
   const params = objectToQueryString({
     ...defaultTrelloParams,
     cards: 'open',
-    card_fields: 'name' // extendable with csv 'name,desc'
+    card_fields: 'name' // extendable with 'name,desc'
   });
 
   const endpoint = `${TRELLO_API}/boards/${boardId}/lists${params}`;
@@ -55,7 +55,6 @@ exports.updateCard = async (cardId, params) => {
 ********************************************************************/
 const ROBINHOOD_API = 'https://api.robinhood.com';
 
-// TODO: Robinhood API isn't working. Check headers.
 // Supports: 'fundamentals', 'quotes'
 exports.getTickerData = async (noun, tickers) => {
   if (!tickers.length) { return []; }
@@ -63,7 +62,7 @@ exports.getTickerData = async (noun, tickers) => {
   const symbols = `symbols=${tickers.join(',')}`;
   const endpoint = `${ROBINHOOD_API}/${noun}/?${symbols}`;
   const data = await requestGetPromise(endpoint, 'robinhood');
-  return data;
+  return data.results;
 };
 
 // TODO: handle pagination of 75. Works with 5 so far.
