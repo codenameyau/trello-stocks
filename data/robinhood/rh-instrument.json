@@ -1,0 +1,22 @@
+{
+  "min_tick_size": null,
+  "type": "stock",
+  "splits": "https:\/\/api.robinhood.com\/instruments\/309344d3-af67-4190-9970-b10618959fe5\/splits\/",
+  "margin_initial_ratio": "0.5000",
+  "url": "https:\/\/api.robinhood.com\/instruments\/309344d3-af67-4190-9970-b10618959fe5\/",
+  "quote": "https:\/\/api.robinhood.com\/quotes\/PYPL\/",
+  "tradability": "tradable",
+  "bloomberg_unique": "EQ0000000037866737",
+  "list_date": "2015-07-06",
+  "name": "PayPal Holdings, Inc. Common Stock",
+  "symbol": "PYPL",
+  "fundamentals": "https:\/\/api.robinhood.com\/fundamentals\/PYPL\/",
+  "state": "active",
+  "country": "US",
+  "day_trade_ratio": "0.2500",
+  "tradeable": true,
+  "maintenance_ratio": "0.2500",
+  "id": "309344d3-af67-4190-9970-b10618959fe5",
+  "market": "https:\/\/api.robinhood.com\/markets\/XNAS\/",
+  "simple_name": "PayPal"
+}

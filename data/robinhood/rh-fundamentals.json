@@ -1,0 +1,19 @@
+{
+  "open": "71.3300",
+  "high": "71.7300",
+  "low": "69.6900",
+  "volume": "17750070.0000",
+  "average_volume": "7569290.4143",
+  "high_52_weeks": "71.7300",
+  "dividend_yield": "0.0000",
+  "low_52_weeks": "38.0600",
+  "market_cap": "85305940000.0000",
+  "pe_ratio": "55.0310",
+  "description": "PayPal Holdings, Inc. enables digital and mobile payments on behalf of consumers and merchants worldwide. It provides a simpler and safer way for businesses of all sizes to accept payments from merchant websites, mobile devices and applications, and at offline retail locations through a range of payment solutions. It also facilitates person to person payments through PayPal, Venmo, and Xoom. The company was founded in January 2015 and is headquartered in San Jose, CA.",
+  "instrument": "https://api.robinhood.com/instruments/309344d3-af67-4190-9970-b10618959fe5/",
+  "ceo": "Daniel H. Schulman",
+  "headquarters_city": "San Jose",
+  "headquarters_state": "California",
+  "num_employees": 18100,
+  "year_founded": null
+}

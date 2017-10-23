@@ -1,6 +1,6 @@
 const api = require('./api');
 // const secret = require('./secret');
-const boardLists = require('../data/dump/board-list-small.json');
+const boardLists = require('../data/trello/board-list-small.json');
 
 // NAK - (Northern Dynasty Minerals) [N/A | 123]
 const formatTitle = exports.formatTitle = (stock) => {
