@@ -11,9 +11,9 @@ const objectToQueryString = exports.objectToQueryString = (object) => {
   }).join('&');
 };
 
-const requestGetPromise = exports.requestGetPromise = (url) => {
+const requestPromise = exports.requestPromise = (options) => {
   return new Promise((resolve, reject) => {
-    request(url, (error, res, data) => {
+    request(options, (error, res, data) => {
       if (error) {
         reject(error);
       } else {
@@ -35,18 +35,27 @@ const defaultTrelloParams = {
 };
 
 exports.getBoardLists = async (boardId) => {
-  const params = objectToQueryString({
+  const queryString = objectToQueryString({
     ...defaultTrelloParams,
     cards: 'open',
     card_fields: 'name' // extendable with 'name,desc'
   });
 
-  const endpoint = `${TRELLO_API}/boards/${boardId}/lists${params}`;
-  return await requestGetPromise(endpoint);
+  const endpoint = `${TRELLO_API}/boards/${boardId}/lists${queryString}`;
+  return await requestPromise(endpoint);
 };
 
 exports.updateCard = async (cardId, params) => {
+  const queryString = objectToQueryString({
+    ...defaultTrelloParams,
+    ...params
+  });
 
+  var options = {
+    method: 'PUT',
+    url: `https://api.trello.com/1/cards/${cardId}${queryString}`
+  };
+  return await requestPromise(options);
 };
 
 
@@ -61,7 +70,7 @@ exports.getTickerData = async (noun, tickers) => {
 
   const symbols = `symbols=${tickers.join(',')}`;
   const endpoint = `${ROBINHOOD_API}/${noun}/?${symbols}`;
-  const data = await requestGetPromise(endpoint, 'robinhood');
+  const data = await requestPromise(endpoint, 'robinhood');
   return data.results;
 };
 
@@ -76,5 +85,5 @@ exports.getHistoricalQuotes = async (tickers) => {
   const symbols = `&symbols=${tickers.join(',')}`;
   const endpoint = `${ROBINHOOD_API}/quotes/historicals/?${params}${symbols}`;
   console.log(endpoint);
-  return await requestGetPromise(endpoint);
+  return await requestPromise(endpoint);
 };
