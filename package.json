@@ -1,9 +1,10 @@
 {
   "name": "trello-stocks",
   "version": "1.0.0",
-  "description": "Update trello stocks",
+  "description": "Update stocks",
   "main": "src/index.js",
   "scripts": {
+    "web": "node index.js",
     "stocks": "node src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
