@@ -29,9 +29,8 @@ describe('round', () => {
     expect(humanize.round(1.55)).toEqual(1.55);
   });
 
-  // Requires verification
   it('should return -1.55 for -1.555', () => {
-    expect(humanize.round(-1.555)).toEqual(-1.55);
+    expect(humanize.round(-1.555)).toEqual(-1.55); // round up?
   });
 
   it('should return 1.56 for 1.555', () => {
@@ -44,36 +43,92 @@ describe('humanizeNumber', () => {
     expect(humanize.humanizeNumber(0)).toEqual('0');
   });
 
+  it('should return 1 for 1', () => {
+    expect(humanize.humanizeNumber(1)).toEqual('1');
+  });
+
+  it('should return -1 for -1', () => {
+    expect(humanize.humanizeNumber(-1)).toEqual('-1');
+  });
+
   it('should return 1.55 for 1.55', () => {
     expect(humanize.humanizeNumber(1.55)).toEqual('1.55');
+  });
+
+  it('should return -1.55 for -1.55', () => {
+    expect(humanize.humanizeNumber(-1.55)).toEqual('-1.55');
   });
 
   it('should return 1.56 for 1.555', () => {
     expect(humanize.humanizeNumber(1.555)).toEqual('1.56');
   });
 
+  it('should return -1.56 for -1.555', () => {
+    expect(humanize.humanizeNumber(-1.555)).toEqual('-1.55'); // round up?
+  });
+
   it('should return 10 for 10', () => {
     expect(humanize.humanizeNumber(10)).toEqual('10');
+  });
+
+  it('should return 10.5 for 10.5', () => {
+    expect(humanize.humanizeNumber(10.5)).toEqual('10.5');
   });
 
   it('should return 100 for 100', () => {
     expect(humanize.humanizeNumber(100)).toEqual('100');
   });
 
+  it('should return -100 for -100', () => {
+    expect(humanize.humanizeNumber(-100)).toEqual('-100');
+  });
+
   it('should return 1k for 1000', () => {
-    expect(humanize.humanizeNumber(1000)).toEqual('1k');
+    expect(humanize.humanizeNumber(1000)).toEqual('1K');
   });
 
-  it('should return 1.5k for 1500', () => {
-    expect(humanize.humanizeNumber(1500)).toEqual('1.5k');
+  it('should return -1k for -1000', () => {
+    expect(humanize.humanizeNumber(-1000)).toEqual('-1K');
   });
 
-  it('should return 10k for 10000', () => {
-    expect(humanize.humanizeNumber(10000)).toEqual('10k');
+  it('should return 1K for 1000.5', () => {
+    expect(humanize.humanizeNumber(1000.5)).toEqual('1K');
   });
 
-  it('should return 100k for 100000', () => {
-    expect(humanize.humanizeNumber(100000)).toEqual('100k');
+  it('should return -1K for -1000.5', () => {
+    expect(humanize.humanizeNumber(-1000.5)).toEqual('-1K');
+  });
+
+  it('should return 1.5K for 1500', () => {
+    expect(humanize.humanizeNumber(1500)).toEqual('1.5K');
+  });
+
+  it('should return -1.5K for -1500', () => {
+    expect(humanize.humanizeNumber(-1500)).toEqual('-1.5K');
+  });
+
+  it('should return 10K for 10000', () => {
+    expect(humanize.humanizeNumber(10000)).toEqual('10K');
+  });
+
+  it('should return -10K for -10000', () => {
+    expect(humanize.humanizeNumber(-10000)).toEqual('-10K');
+  });
+
+  it('should return 15K for 15000', () => {
+    expect(humanize.humanizeNumber(15000)).toEqual('15K');
+  });
+
+  it('should return -15K for -15000', () => {
+    expect(humanize.humanizeNumber(-15000)).toEqual('-15K');
+  });
+
+  it('should return 100K for 100000', () => {
+    expect(humanize.humanizeNumber(100000)).toEqual('100K');
+  });
+
+  it('should return -100K for -100000', () => {
+    expect(humanize.humanizeNumber(-100000)).toEqual('-100K');
   });
 
   it('should return 1M for 1000000', () => {
@@ -102,5 +157,15 @@ describe('humanizeNumber', () => {
 
   it('should return 1T for 1000000000000', () => {
     expect(humanize.humanizeNumber(1000000000000)).toEqual('1T');
+  });
+
+  it('should return 1Q for 1000000000000000', () => {
+    expect(humanize.humanizeNumber(1000000000000000)).toEqual('1Q');
+  });
+
+  it('should throw RangeError if value is too large', () => {
+    expect(() => {
+      humanize.humanizeNumber(1000000000000000000);
+    }).toThrow(RangeError);
   });
 });
