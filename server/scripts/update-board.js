@@ -1,5 +1,3 @@
-require('dotenv').config();
-
 const trello = require('../api/trello');
 const robinhood = require('../api/robinhood');
 const humanize = require('../utils/humanize');
@@ -35,15 +33,17 @@ const consumeFundamentals = exports.consumeFundamentals = (ticker, fundamentals)
 /********************************************************************
 * MAIN PROGRAM
 ********************************************************************/
-const main = async () => {
+const updateCardTickers = exports.updateCardTickers = async (verbose) => {
   const boardLists = await trello.getBoardLists(TRELLO_BOARD_ID);
   const cards = {};
 
   boardLists.forEach((list) => {
-    list.cards.forEach((card) => {
-      const ticker = card.name.split(' ')[0].trim();
-      cards[ticker] = card;
-    });
+    if (list.subscribed) {
+      list.cards.forEach((card) => {
+        const ticker = card.name.split(' ')[0].trim();
+        cards[ticker] = card;
+      });
+    }
   });
 
   const tickers = [...(new Set(Object.keys(cards)))];
@@ -57,8 +57,6 @@ const main = async () => {
   // Send update requests to trello.
   tickers.forEach((ticker) => {
     const card = cards[ticker];
-    console.log(`[+] Updated - ${ticker}`);
-
     const params = {
       name: card.trelloUpdate.name,
       desc: card.trelloUpdate.description
@@ -66,8 +64,6 @@ const main = async () => {
     trello.updateCard(card.id, params);
   });
 
-  console.log(`\nTimestamp: ${(new Date()).toJSON()}`);
-  console.log(`Total: ${tickers.length}`);
+  verbose && console.log(`\nTimestamp: ${(new Date()).toJSON()}`);
+  verbose && console.log(`Total updated: ${tickers.length}`);
 };
-
-main();
