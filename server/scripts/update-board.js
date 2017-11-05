@@ -1,42 +1,24 @@
-const api = require('./api');
-const secret = require('./secret');
+require('dotenv').config();
 
+const trello = require('../api/trello');
+const robinhood = require('../api/robinhood');
+const humanize = require('../utils/humanize');
+
+const TRELLO_BOARD_ID = process.env.TRELLO_BOARD_ID;
 
 /********************************************************************
-* UTILS
+* HELPERS
 ********************************************************************/
-const round = exports.round = (num, precision = 2) => {
-  if (num == null) { return 'N/A' };
-  return parseFloat(num).toFixed(precision);
-};
-
-const abbreviateNumber = exports.abbreviateNumber = (value) => {
-  var newValue = value;
-  if (value >= 1000) {
-    var suffixes = ["", "K", "M", "B", "T"];
-    var suffixNum = Math.floor(("" + value).length / 3);
-    var shortValue = '';
-    for (var precision = 2; precision >= 1; precision--) {
-      shortValue = parseFloat((suffixNum != 0 ? (value / Math.pow(1000, suffixNum)) : value).toPrecision(precision));
-      var dotLessShortValue = (shortValue + '').replace(/[^a-zA-Z 0-9]+/g, '');
-      if (dotLessShortValue.length <= 2) { break; }
-    }
-    if (shortValue % 1 != 0) shortNum = shortValue.toFixed(1);
-    newValue = shortValue + suffixes[suffixNum];
-  }
-  return newValue;
-}
-
 const formatTitle = exports.formatTitle = (ticker, fundamentals) => {
-  const priceHigh = round(fundamentals.high, 2);
-  const peRatio = round(fundamentals.pe_ratio, 2);
+  const priceHigh = humanize.round(fundamentals.high, 2);
+  const peRatio = humanize.round(fundamentals.pe_ratio, 2);
   return `${ticker} - $${priceHigh} (P/E: ${peRatio})`;
 };
 
 const formatDescription = exports.formatDescription = (fundamentals) => {
   const employees = fundamentals.num_employees == null ? 'N/A' : fundamentals.num_employees;
   const founded = fundamentals.year_founded
-  const marketCap = abbreviateNumber(parseFloat(fundamentals.market_cap));
+  const marketCap = humanize.humanizeNumber(parseFloat(fundamentals.market_cap));
   const ceo = fundamentals.ceo;
   const desc = fundamentals.description;
   return `Employees: ${employees} | Founded: ${founded} | Market Cap: ${marketCap}\n\nCEO: ${ceo}\n\n${desc}`;
@@ -54,7 +36,7 @@ const consumeFundamentals = exports.consumeFundamentals = (ticker, fundamentals)
 * MAIN PROGRAM
 ********************************************************************/
 const main = async () => {
-  const boardLists = await api.getBoardLists(secret.TRELLO_BOARD_ID);
+  const boardLists = await trello.getBoardLists(TRELLO_BOARD_ID);
   const cards = {};
 
   boardLists.forEach((list) => {
@@ -65,25 +47,27 @@ const main = async () => {
   });
 
   const tickers = [...(new Set(Object.keys(cards)))];
-  const fundamentals = await api.getTickerData('fundamentals', tickers);
+  const fundamentals = await robinhood.getTickerData('fundamentals', tickers);
 
   tickers.forEach((ticker, i) => {
     cards[ticker].fundamentals = fundamentals[i]
     cards[ticker].trelloUpdate = consumeFundamentals(ticker, fundamentals[i])
   });
 
-  console.log(cards);
-
   // Send update requests to trello.
   tickers.forEach((ticker) => {
     const card = cards[ticker];
+    console.log(`[+] Updated - ${ticker}`);
+
     const params = {
       name: card.trelloUpdate.name,
       desc: card.trelloUpdate.description
     };
-    api.updateCard(card.id, params);
+    trello.updateCard(card.id, params);
   });
-};
 
+  console.log(`\nTimestamp: ${(new Date()).toJSON()}`);
+  console.log(`Total: ${tickers.length}`);
+};
 
 main();

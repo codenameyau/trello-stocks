@@ -6,7 +6,7 @@ request(url, (err, res, body) => {
   console.log(body);
 });
 
-const requestRH = async (url) => {
+const requestAsync = async (url) => {
   return new Promise((resolve, reject) => {
     request(url, (err, res, body) => {
       resolve(body);
@@ -15,7 +15,7 @@ const requestRH = async (url) => {
 };
 
 const main = async () => {
-  const data = await requestRH(url);
+  const data = await requestAsync(url);
   console.log(data);
 };
 

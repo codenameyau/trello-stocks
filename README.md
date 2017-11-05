@@ -38,12 +38,14 @@ the boards field and you should find it.
 }
 ```
 
-Then create `secret.js` from `secret.example.js` and fill in these fields.
+Then create `.env` file with these fields.
 
-```javascript
-exports.TRELLO_API_KEY = '';
-exports.TRELLO_OAUTH_TOKEN = '';
-exports.TRELLO_BOARD_ID = '';
+```bash
+TRELLO_API_KEY=''
+TRELLO_OAUTH_TOKEN=''
+TRELLO_BOARD_ID=''
+GMAIL_USERNAME=''
+GMAIL_PASSWORD=''
 ```
 
 Once that is set up, run the following to check that the Trello setup is working.

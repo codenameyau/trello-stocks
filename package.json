@@ -2,11 +2,14 @@
   "name": "trello-stocks",
   "version": "1.0.0",
   "description": "Update stocks",
-  "main": "src/index.js",
+  "main": "index.js",
   "scripts": {
     "web": "node index.js",
-    "stocks": "node src/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "update-board": "node server/scripts/update-board.js",
+    "test": "jest"
+  },
+  "engines": {
+    "node": "8.6.0"
   },
   "repository": {
     "type": "git",
@@ -24,6 +27,7 @@
     "robinhood"
   ],
   "dependencies": {
+    "dotenv": "^4.0.0",
     "request": "^2.83.0"
   }
 }
