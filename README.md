@@ -1,5 +1,13 @@
 # trello-stocks
 
+## Available Commands
+```bash
+# This will update the stock tickers of all subscribed lists.
+npm run update-board
+
+# Run all unit tests.
+npm run test
+```
 
 ## Installation
 
