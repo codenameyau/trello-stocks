@@ -34,11 +34,14 @@ const consumeFundamentals = exports.consumeFundamentals = (ticker, fundamentals)
 * MAIN PROGRAM
 ********************************************************************/
 const updateCardTickers = exports.updateCardTickers = async (verbose) => {
+  verbose && console.log(`\n[+] [${(new Date()).toLocaleString()}] Updating board: ${TRELLO_BOARD_ID}`);
   const boardLists = await trello.getBoardLists(TRELLO_BOARD_ID);
   const cards = {};
+  const subscribedList = [];
 
   boardLists.forEach((list) => {
     if (list.subscribed) {
+      subscribedList.push(list.name);
       list.cards.forEach((card) => {
         const ticker = card.name.split(' ')[0].trim();
         cards[ticker] = card;
@@ -64,6 +67,6 @@ const updateCardTickers = exports.updateCardTickers = async (verbose) => {
     trello.updateCard(card.id, params);
   });
 
-  verbose && console.log(`\nTimestamp: ${(new Date()).toJSON()}`);
-  verbose && console.log(`Total updated: ${tickers.length}`);
+  verbose && console.log(`[+] [${(new Date()).toLocaleString()}] Updated lists: ${subscribedList.join(', ')}`);
+  verbose && console.log(`[+] [${(new Date()).toLocaleString()}] Updated cards: ${tickers.length}`);
 };
