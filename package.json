@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "web": "node index.js",
-    "job:update-board": "node job/update-board.js",
-    "update-board": "node bin/update-board.js",
+    "job:update": "node job/update-board.js",
+    "update": "node bin/update-board.js",
     "test": "jest"
   },
   "engines": {
