@@ -51,6 +51,7 @@ Then create `.env` file with these fields.
 ```bash
 TRELLO_API_KEY=''
 TRELLO_API_TOKEN=''
+TRELLO_OAUTH_TOKEN=''
 TRELLO_BOARD_ID=''
 ```
 
