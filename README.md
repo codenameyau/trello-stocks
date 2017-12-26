@@ -50,10 +50,8 @@ Then create `.env` file with these fields.
 
 ```bash
 TRELLO_API_KEY=''
-TRELLO_OAUTH_TOKEN=''
+TRELLO_API_TOKEN=''
 TRELLO_BOARD_ID=''
-GMAIL_USERNAME=''
-GMAIL_PASSWORD=''
 ```
 
 Once that is set up, run the following to check that the Trello setup is working.
