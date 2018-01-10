@@ -46,7 +46,7 @@ the boards field and you should find it.
 }
 ```
 
-Then create `.env` file with these fields.
+Then create `server/secrets.json` file with these fields.
 
 ```bash
 TRELLO_API_KEY=''

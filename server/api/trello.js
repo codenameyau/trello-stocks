@@ -1,8 +1,9 @@
 const helpers = require('./helpers');
+const secrets = require('../secrets.json');
 
 const TRELLO_API = 'https://api.trello.com/1';
-const TRELLO_API_KEY = process.env.TRELLO_API_KEY;
-const TRELLO_API_TOKEN = process.env.TRELLO_API_TOKEN;
+const TRELLO_API_KEY = secrets.TRELLO_API_KEY;
+const TRELLO_API_TOKEN = secrets.TRELLO_API_TOKEN;
 
 const defaultTrelloParams = {
   key: TRELLO_API_KEY,

@@ -1,8 +1,9 @@
 const trello = require('../api/trello');
 const robinhood = require('../api/robinhood');
 const humanize = require('../utils/humanize');
+const secrets = require('../secrets.json');
 
-const TRELLO_BOARD_ID = process.env.TRELLO_BOARD_ID;
+const TRELLO_BOARD_ID = secrets.TRELLO_BOARD_ID;
 
 /********************************************************************
 * HELPERS
