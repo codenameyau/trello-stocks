@@ -26,11 +26,11 @@ First log into your trello account then visit this URL:
 - https://trello.com/app-key
 
 It will contain two keys: your trello api key and your OAuth token. You will
-need both of these fields.
+need both of these fields as well as generate an API_TOKEN.
 
 Secondly get your trello board id from a network request. It will be located
-in the response body for the `https://trello.com/1/Members/me` API call. Look at
-the boards field and you should find it.
+in the response body for the `/Members/me` API call or `/boards`.
+Look at the boards field and you should find it.
 
 ```json
 {
