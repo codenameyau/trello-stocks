@@ -2,6 +2,7 @@ const helpers = require('./helpers');
 
 const ROBINHOOD_API = 'https://api.robinhood.com';
 
+// TODO: This endpoint is dead.
 // Supports: 'fundamentals', 'quotes'
 exports.getTickerData = async (noun, tickers) => {
   if (!tickers.length) { return []; }

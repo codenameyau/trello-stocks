@@ -37,9 +37,9 @@ const consumeFundamentals = exports.consumeFundamentals = (ticker, fundamentals)
 const updateCardTickers = exports.updateCardTickers = async (verbose) => {
   verbose && console.log(`\n[+] [${(new Date()).toLocaleString()}] Updating board: ${TRELLO_BOARD_ID}`);
   const boardLists = await trello.getBoardLists(TRELLO_BOARD_ID);
-  const cards = {};
   const subscribedList = [];
 
+  const cards = {};
   boardLists.forEach((list) => {
     if (list.subscribed) {
       subscribedList.push(list.name);
