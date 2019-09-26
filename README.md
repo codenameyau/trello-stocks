@@ -46,23 +46,12 @@ the boards field and you should find it.
 }
 ```
 
-Then create `server/secrets.json` file with these fields.
-
-```bash
-TRELLO_API_KEY=''
-TRELLO_API_TOKEN=''
-TRELLO_OAUTH_TOKEN=''
-TRELLO_BOARD_ID=''
-```
+Then create a `server/secrets.json` file from `secrets.example.json` and fill out
+those fields.
 
 Once that is set up, run the following to check that the Trello setup is working.
 You should see a JSON reponse body of your board details. Confirm that it is the
 correct board.
-
-
-```bash
-npm trello
-```
 
 ### Running script
 
@@ -71,7 +60,7 @@ the unofficial Robinhood API.
 
 Running script
 ```bash
-npm stocks
+npm run update
 ```
 
 ## Robinhood API
